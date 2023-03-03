@@ -17,6 +17,7 @@ Game::Game()
         // mIsMovingLeft = true; mIsMovingRight = true;
 }
 
+/* Checks for key presses */
 void Game::processEvents()
 {
     sf::Event event;
@@ -36,7 +37,8 @@ void Game::processEvents()
         }
      }
  }
-       
+
+// Only public function
 void Game::run()
 {
     
@@ -56,18 +58,23 @@ void Game::run()
     }
 }
 
+/* Updates position of mPlayer object based on key presses,
+ * speed can be changed in the PlayerSpeed float, 
+ * It works by multiplying the vector with the time that has passed
+ * since the last frame was drawn */
 void Game::update(sf::Time deltaTime)
 {
-    float PlayerSpeed = 200;
+    const float playerSpeed = 200;
     sf::Vector2f movement (0.f, 0.f);
+
     if (mIsMovingUp)
-        movement.y -= PlayerSpeed;
+        movement.y -= playerSpeed;
     if (mIsMovingDown)
-        movement.y += PlayerSpeed;
+        movement.y += playerSpeed;
     if (mIsMovingRight)
-        movement.x += PlayerSpeed;
+        movement.x += playerSpeed;
     if (mIsMovingLeft)
-        movement.x -= PlayerSpeed;
+        movement.x -= playerSpeed;
     
     mPlayer.move(movement * deltaTime.asSeconds());
 }
@@ -79,6 +86,7 @@ void Game::render()
     mWindow.display();
 }
 
+/* Handles Input for key presses */
 void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 {
     if (key == sf::Keyboard::W) 
