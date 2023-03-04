@@ -1,5 +1,6 @@
 #include "helper_functions.hpp"
 #include "game.hpp"
+#include "texture_holder.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
