@@ -16,10 +16,14 @@ private:
 
 private:
     sf::RenderWindow mWindow;
-    sf::CircleShape mPlayer;
+    //    sf::CircleShape mPlayer;
+    sf::Texture mTexture;
+    sf::Sprite mPlayer;
 
     bool mIsMovingLeft;
     bool mIsMovingRight;
     bool mIsMovingUp;
     bool mIsMovingDown;
+
+
 };

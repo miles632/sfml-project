@@ -1,4 +1,6 @@
+#include "helper_functions.hpp"
 #include "game.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Window/Event.hpp>
@@ -6,15 +8,15 @@
 Game::Game()
 
    :mWindow(sf::VideoMode(800, 600), "SFML APPLICATION")
-    ,mPlayer(sf::CircleShape(40.f))
+    ,mPlayer()
+    ,mTexture()
 {
-        mPlayer.setPosition(100.f, 100.f);
-        mPlayer.setFillColor(sf::Color::Cyan);
-
-        // isPressed = true;
-        // sets all key bools to true
-        // mIsMovingDown = true; mIsMovingUp = true;
-        // mIsMovingLeft = true; mIsMovingRight = true;
+    std::string currentDir = GetCurrentDirectory();
+    if (!mTexture.loadFromFile(currentDir + "/spaceship.png"))
+        std::cerr << "Error Loading sprite" << std::endl;
+    mPlayer.setTexture(mTexture);
+    mPlayer.setPosition(100.f, 100.f);
+    mPlayer.setScale(2.0f, 2.0f);
 }
 
 /* Checks for key presses */
@@ -41,9 +43,11 @@ void Game::processEvents()
 // Only public function
 void Game::run()
 {
-    
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;    
+    const sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
+
     sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
     while (mWindow.isOpen())
     {
         processEvents();
@@ -64,7 +68,7 @@ void Game::run()
  * since the last frame was drawn */
 void Game::update(sf::Time deltaTime)
 {
-    const float playerSpeed = 200;
+    const float playerSpeed = 300;
     sf::Vector2f movement (0.f, 0.f);
 
     if (mIsMovingUp)
