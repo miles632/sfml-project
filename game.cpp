@@ -7,7 +7,6 @@
 #include <SFML/Window/Event.hpp>
 
 Game::Game()
-
    :mWindow(sf::VideoMode(800, 600), "SFML APPLICATION")
     ,mPlayer()
     ,mTexture()
@@ -38,8 +37,8 @@ void Game::processEvents()
                 mWindow.close();
                 break;
         }
-     }
- }
+    }
+}
 
 // Only public function
 void Game::run()

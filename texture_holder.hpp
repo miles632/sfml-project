@@ -13,10 +13,12 @@ class TextureHolder
 {
 
 private:
-    /* the Map maps the Textures::ID enumeration to the unique ptr       *
-     * each sf::Texture is loaded into the map with the corresponding ID */
+
     std::map<Textures::ID, std::unique_ptr<sf::Texture>> mTextureMap;
 
     void LoadResource(Textures::ID id, const std::string& filename);
+
+    sf::Texture& GetTexture(Textures::ID id);
+    sf::Texture& GetTexture(Textures::ID id) const;
 
 };
