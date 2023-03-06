@@ -6,17 +6,27 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Window/Event.hpp>
 
-Game::Game()
-   :mWindow(sf::VideoMode(800, 600), "SFML APPLICATION")
+Game::Game() 
+    :mWindow(sf::VideoMode(800, 600), "SFML APPLICATION")
     ,mPlayer()
     ,mTexture()
 {
-    std::string currentDir = GetCurrentDirectory();
+ /* std::string currentDir = GetCurrentDirectory();
     if (!mTexture.loadFromFile(currentDir + "/spaceship.png"))
         std::cerr << "Error Loading sprite" << std::endl;
     mPlayer.setTexture(mTexture);
     mPlayer.setPosition(100.f, 100.f);
-    mPlayer.setScale(2.0f, 2.0f);
+    mPlayer.setScale(2.0f, 2.0f); */
+    TextureHolder textures;
+    textures.LoadResource(Textures::Spaceship, GetCurrentDirectory() + "/spaceship.png");
+    textures.LoadResource(Textures::Landscape, GetCurrentDirectory() + "/space.png");
+    textures.LoadResource(Textures::Missile, GetCurrentDirectory() + "/missile.png");
+
+    sf::Sprite playerPlane;
+    playerPlane.setTexture(textures.GetTexture(Textures::Spaceship));
+
+    auto inserted = mTextureMap.insert(std::make_pair(id, std::move(resource)));
+     
 }
 
 /* Checks for key presses */

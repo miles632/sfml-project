@@ -8,7 +8,8 @@ void TextureHolder::LoadResource(Textures::ID id, const std::string& filename)
   // Creates a new Texture object on the heap
   std::unique_ptr<sf::Texture> texture (new sf::Texture());
   // loads the image to the texture
-  texture->loadFromFile(filename);
+  if (!texture->loadFromFile(filename))
+    throw std::runtime_error ("TextureHolder::load - Failed to load " + filename);
   // Inserts Texture into map
   mTextureMap.insert(std::make_pair(id, std::move(texture)));
 }
@@ -18,4 +19,9 @@ sf::Texture& TextureHolder::GetTexture(Textures::ID id)
 {
   auto found = mTextureMap.find(id);
   return *found->second; // the "second" statement returns the value of the kv pair
+}
+sf::Texture& TextureHolder::GetTexture(Textures::ID id) const
+{ 
+  auto found = mTextureMap.find(id);
+  return *found->second; 
 }
